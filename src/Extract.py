@@ -8,13 +8,11 @@ API_URL = "https://data.cityofchicago.org/api/v3/views/s4vu-giwb/query.json"
 PAGE_SIZE = 5_000
 LOGGER = logging.getLogger(__name__)
 
-app_token = os.getenv("SOCRATA_APP_TOKEN")
-
-if not app_token:
-    raise RuntimeError("SOCRATA_APP_TOKEN não foi encontrada.")
-
-
 def extract_payments() -> pl.DataFrame:
+    app_token = os.getenv("SOCRATA_APP_TOKEN")
+    if not app_token:
+        raise RuntimeError("SOCRATA_APP_TOKEN nao foi configurada.")
+
     page_number = 1
     processed_rows = 0
     batches: list[pl.DataFrame] = []

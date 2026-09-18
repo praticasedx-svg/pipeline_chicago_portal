@@ -14,4 +14,4 @@ RUN uv sync --frozen --no-dev
 COPY src ./src
 COPY main.py ./
 
-CMD ["/app/.venv/bin/python", "main.py"]
+CMD ["sh", "-c", "/app/.venv/bin/functions-framework --target ingest_payments --host 0.0.0.0 --port ${PORT:-8080}"]
