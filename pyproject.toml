@@ -1,0 +1,10 @@
+[project]
+name = "chicago-portal"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+    "google-cloud-storage>=3.14.1",
+    "polars>=1.44.2",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
