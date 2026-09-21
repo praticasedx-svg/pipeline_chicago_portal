@@ -24,11 +24,7 @@ def save_raw_payments(df: pl.DataFrame, output_path: Path) -> Path:
 def upload_raw_to_gcs(local_file: Path, bucket_name: str) -> str:
     """Envia o Parquet ao bucket usando a Service Account do ambiente."""
     extracted_at = datetime.now(timezone.utc)
-    object_name = (
-        "raw/payments/"
-        f"extracted_at={extracted_at:%Y-%m-%d}/"
-        f"payments_{extracted_at:%Y%m%dT%H%M%SZ}.parquet"
-    )
+    object_name = f"raw/payment_{extracted_at:%Y-%m-%d}.parquet"
 
     blob = storage.Client().bucket(bucket_name).blob(object_name)
     blob.upload_from_filename(local_file, content_type="application/octet-stream")
