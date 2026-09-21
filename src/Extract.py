@@ -28,8 +28,10 @@ def extract_payments() -> pl.DataFrame:
         while True:
             payload = {
                 "query": """
-                    SELECT *
-                    ORDER BY check_date, voucher_number, department_name, vendor_name
+                    SELECT
+                        *,
+                        :id AS source_row_id
+                    ORDER BY :id
                 """,
                 "page": {
                     "pageNumber": page_number,
